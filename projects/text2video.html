@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text2Video — Michael Zhang</title>
+  <meta name="description" content="Text-driven talking-head video synthesis with personalized phoneme-pose dictionary. ICASSP 2022.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg-primary: #faf9f7;
+      --bg-card: #ffffff;
+      --text-primary: #1a1a1f;
+      --text-secondary: #55524d;
+      --text-muted: #8a8680;
+      --accent: #8b6914;
+      --accent-dim: #a68020;
+      --accent-glow: rgba(139,105,20,0.08);
+      --border: rgba(0,0,0,0.08);
+      --nav-bg: rgba(250,249,247,0.85);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Outfit', system-ui, sans-serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-primary: #0a0a0f;
+        --bg-card: #16161f;
+        --text-primary: #e8e5df;
+        --text-secondary: #9a9690;
+        --text-muted: #6b6660;
+        --accent: #c9a55a;
+        --accent-dim: #9a7d3a;
+        --accent-glow: rgba(201,165,90,0.12);
+        --border: rgba(255,255,255,0.06);
+        --nav-bg: rgba(10,10,15,0.85);
+      }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.7;
+      font-weight: 300;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    a:hover { color: var(--text-primary); }
+
+    ::selection { background: var(--accent); color: var(--bg-primary); }
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.2rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: 0.02em;
+    }
+
+    nav .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      position: relative;
+    }
+
+    nav .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+
+    nav .nav-links a:hover { color: var(--text-primary); }
+    nav .nav-links a:hover::after { width: 100%; }
+
+    .project-page {
+      max-width: 52rem;
+      margin: 0 auto;
+      padding: 6.5rem 1.5rem 4rem;
+    }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 1px 3px var(--accent-glow);
+    }
+
+    @media (min-width: 640px) {
+      .project-page { padding-left: 2rem; padding-right: 2rem; }
+      .project-card { padding: 2.5rem 2.25rem; }
+    }
+
+    .project-card h1 {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 4vw, 2.35rem);
+      font-weight: 600;
+      line-height: 1.25;
+      letter-spacing: 0.01em;
+      margin-bottom: 1rem;
+    }
+
+    .venue-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      background: var(--accent-glow);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      margin-bottom: 1.25rem;
+      line-height: 1.4;
+    }
+
+    .authors {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 0.85rem;
+      color: var(--text-primary);
+    }
+
+    .abstract {
+      margin-bottom: 2rem;
+    }
+
+    .abstract p {
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+    }
+
+    .video-section { margin-bottom: 2rem; }
+
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg-primary);
+    }
+
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .links-section ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1rem;
+    }
+
+    .links-section li a {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.92rem;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--accent-glow);
+    }
+
+    .links-section li a:hover {
+      border-color: var(--accent-dim);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="logo" href="../index.html">Michael Zhang</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Back</a></li>
+    </ul>
+  </nav>
+
+  <main class="project-page">
+    <article class="project-card">
+      <h1>Text2Video: Text-driven Talking-head Video Synthesis with Personalized Phoneme-Pose Dictionary</h1>
+      <p class="venue-badge">ICASSP 2022</p>
+      <p class="authors">Sibo Zhang, Jiahong Yuan, Miao Liao, Liangjun Zhang</p>
+
+      <section class="abstract">
+        <h2 class="section-title">Abstract</h2>
+        <p>With the advance of deep learning technology, automatic video generation from audio or text has become an emerging and promising research topic. In this paper, we present a novel approach to synthesize video from the text. The method builds a phoneme-pose dictionary and trains a generative adversarial network (GAN) to generate video from interpolated phoneme poses. Compared to audio-driven video generation algorithms, our approach has a number of advantages: 1) It only needs a fraction of the training data used by an audio-driven approach; 2) It is more flexible and not subject to vulnerability due to speaker variation; 3) It significantly reduces the preprocessing, training and inference time. We perform extensive experiments to compare the proposed method with state-of-the-art talking face generation methods on a benchmark dataset and datasets of our own. The results demonstrate the effectiveness and superiority of our approach.</p>
+      </section>
+
+      <section class="video-section">
+        <h2 class="section-title">Video</h2>
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/TQJCyQ4ISEg"
+            title="Text2Video — video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+      </section>
+
+      <section class="links-section">
+        <h2 class="section-title">Links</h2>
+        <ul>
+          <li><a href="https://arxiv.org/pdf/2104.14631.pdf" target="_blank" rel="noopener noreferrer">PDF</a></li>
+          <li><a href="https://github.com/michaelzhang-ai/Text2Video" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        </ul>
+      </section>
+    </article>
+  </main>
+</body>
+</html>
