@@ -112,6 +112,61 @@
     nav .nav-links a:hover { color: var(--text-primary); }
     nav .nav-links a:hover::after { width: 100%; }
 
+    .nav-dropdown { position: relative; }
+    .nav-dropdown > a { cursor: pointer; }
+    .nav-dropdown-menu {
+      display: none; position: absolute; top: calc(100% + 12px); left: 50%;
+      transform: translateX(-50%); min-width: 220px; background: var(--nav-bg);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08); z-index: 200; list-style: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-dropdown-menu { box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+    }
+    .nav-dropdown-menu::before {
+      content: ''; position: absolute; top: -12px; left: 0; right: 0; height: 12px;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu,
+    .nav-dropdown.touch-open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu li a {
+      display: block; padding: 0.55rem 1.2rem; font-size: 0.8rem; font-weight: 400;
+      color: var(--text-secondary); text-transform: none; letter-spacing: 0.02em;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .nav-dropdown-menu li a::after { display: none; }
+    .nav-dropdown-menu li a:hover { color: var(--accent); background: var(--accent-glow); }
+    .nav-dropdown-menu li a .project-venue {
+      font-size: 0.68rem; color: var(--text-muted); margin-left: 0.4rem;
+    }
+    .nav-dropdown-menu li a.active-project { color: var(--accent); font-weight: 500; }
+
+    .nav-toggle {
+      display: none; background: none; border: 1px solid var(--border);
+      border-radius: 6px; padding: 0.4rem 0.6rem; color: var(--text-secondary);
+      cursor: pointer; font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-toggle { display: block; }
+      nav .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; background: var(--nav-bg);
+        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+        padding: 1rem 2rem; border-bottom: 1px solid var(--border); gap: 1rem;
+      }
+      nav .nav-links.open { display: flex; }
+      .nav-dropdown-menu {
+        position: static; transform: none; border: none; border-radius: 0;
+        box-shadow: none; padding: 0.3rem 0 0 1rem; min-width: 0;
+        background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none;
+      }
+      .nav-dropdown-menu::before { display: none; }
+      .nav-dropdown .nav-dropdown-menu { display: none; }
+      .nav-dropdown.touch-open .nav-dropdown-menu { display: block; }
+    }
+
     .project-page {
       max-width: 52rem;
       margin: 0 auto;
@@ -226,8 +281,24 @@
 <body>
   <nav>
     <a class="logo" href="../index.html">Michael Zhang</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
     <ul class="nav-links">
-      <li><a href="../index.html">Back</a></li>
+      <li><a href="../index.html#about">About</a></li>
+      <li><a href="../index.html#experience">Experience</a></li>
+      <li class="nav-dropdown">
+        <a>Projects &#9662;</a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="sglang.html">SGLang CI <span class="project-venue">AMD 2024</span></a></li>
+          <li><a href="text2video.html">Text2Video <span class="project-venue">ICASSP 2022</span></a></li>
+          <li><a href="excavator.html">Excavator Safety <span class="project-venue">ISARC 2021</span></a></li>
+          <li><a href="speech2video.html" class="active-project">Speech2Video <span class="project-venue">ACCV 2020</span></a></li>
+          <li><a href="dvi.html">DVI: Video Inpainting <span class="project-venue">ECCV 2020</span></a></li>
+          <li><a href="trafficpredict.html">TrafficPredict <span class="project-venue">AAAI 2019</span></a></li>
+        </ul>
+      </li>
+      <li><a href="../index.html#publications">Publications</a></li>
+      <li><a href="../index.html#patents">Patents</a></li>
+      <li><a href="../index.html#service">Service</a></li>
     </ul>
   </nav>
 
@@ -264,5 +335,21 @@
       </section>
     </article>
   </main>
+<script>
+document.querySelectorAll('.nav-dropdown > a').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    if (window.innerWidth <= 768) {
+      e.preventDefault();
+      toggle.closest('.nav-dropdown').classList.toggle('touch-open');
+    }
+  });
+});
+document.querySelectorAll('.nav-dropdown-menu a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+    document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('touch-open'));
+  });
+});
+</script>
 </body>
 </html>
