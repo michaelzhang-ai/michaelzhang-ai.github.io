@@ -1,6 +1,6 @@
 # michaelzhang-ai.github.io
 
-Personal portfolio website for Michael Zhang — ML/Systems Engineer specializing in LLM serving infrastructure, GPU optimization, and computer vision.
+Personal portfolio website for Michael Zhang — ML/Systems Engineer specializing in LLM serving infrastructure, GPU optimization, and computer vision. Last updated August 2026.
 
 ## Live Site
 

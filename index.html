@@ -717,7 +717,7 @@
     <li class="nav-dropdown">
       <a href="#publications">Projects &#9662;</a>
       <ul class="nav-dropdown-menu">
-        <li><a href="projects/sglang.html">SGLang CI <span class="project-venue">AMD 2024</span></a></li>
+        <li><a href="projects/sglang.html">SGLang CI <span class="project-venue">AMD 2024–26</span></a></li>
         <li><a href="projects/text2video.html">Text2Video <span class="project-venue">ICASSP 2022</span></a></li>
         <li><a href="projects/excavator.html">Excavator Safety <span class="project-venue">ISARC 2021</span></a></li>
         <li><a href="projects/speech2video.html">Speech2Video <span class="project-venue">ACCV 2020</span></a></li>
@@ -739,7 +739,7 @@
       LLM Serving Infrastructure · GPU Optimization · Computer Vision · Autonomous Driving
     </p>
     <p class="hero-bio" style="margin-top: -1rem">
-      <strong>7+ years</strong> building ML systems — from LLM serving infrastructure and GPU optimization on AMD MI300X to full-stack perception for autonomous machines. Published 10+ papers at top venues and 15+ patents. Google Scholar citations: 810+.
+      <strong>8+ years</strong> building ML systems — from LLM serving infrastructure and GPU optimization on AMD Instinct GPUs to full-stack perception for autonomous machines. Published 10+ papers at top venues and 15+ patents. Google Scholar citations: 890+.
     </p>
     <div class="hero-links">
       <a href="https://scholar.google.com/citations?user=tbHn0joAAAAJ&hl=en" target="_blank" rel="noopener">
@@ -768,11 +768,11 @@
     </div>
     <div class="exp-role">Member of Technical Staff</div>
     <ul class="exp-highlights">
-      <li>SGLang CI toolkit for AMD MI300X/MI325X/MI355X — nightly accuracy, perf benchmarks, and unit tests across ROCm with Docker-based GitHub Actions runners.</li>
+      <li>SGLang CI toolkit for AMD MI300X/MI325X/MI355X — nightly accuracy, perf benchmarks, unit tests, and disagg (1P1D) jobs across ROCm 7.0/7.2 with Docker-based GitHub Actions runners.</li>
       <li>Flask CI dashboard for health monitoring, perf trends, AMD vs NVIDIA test coverage, and PR-level results.</li>
-      <li>Enabled multiple LLM/VLM architectures on AMD (MoE, MLA, NSA). End-to-end: backend selection, test authoring, CI registration.</li>
-      <li>Active upstream contributor to sgl-project/sglang and ROCm/sglang-ci. Fixed AMD-specific regressions in aiter backend.</li>
-      <li>MI300X vs H100 perf benchmarking. Throughput/latency regression testing for latest models.</li>
+      <li>Enabled multiple LLM/VLM architectures on AMD (MoE, MLA, NSA, MXFP4). End-to-end: backend selection, test authoring, CI registration.</li>
+      <li>100+ merged PRs to sgl-project/sglang. Upstream contributor to ROCm/sglang-ci. Fixed AMD-specific regressions in aiter and Triton backends.</li>
+      <li>MI300X vs H100 perf benchmarking. Throughput/latency regression testing for DeepSeek-V4, Kimi-K3, GLM-5.2, Qwen3.5, GPT-OSS, and Grok.</li>
     </ul>
   </div>
 
@@ -820,7 +820,7 @@
     <div class="skill-card">
       <div class="skill-label">ML / GPU</div>
       <div class="skill-tags">
-        <span>PyTorch</span><span>ROCm</span><span>SGLang</span><span>VLLM</span><span>CUDA</span><span>HIP</span><span>aiter</span><span>Triton</span><span>TensorRT</span><span>TensorFlow</span><span>JAX</span><span>ONNX</span>
+        <span>PyTorch</span><span>ROCm</span><span>SGLang</span><span>VLLM</span><span>CUDA</span><span>HIP</span><span>aiter</span><span>Triton</span><span>MXFP4</span><span>FlashMLA</span><span>TensorRT</span><span>TensorFlow</span><span>JAX</span><span>ONNX</span>
       </div>
     </div>
     <div class="skill-card">
@@ -864,6 +864,31 @@
   </div>
 
   <div class="pub-list">
+
+    <div class="pub-card reveal">
+      <div class="pub-number">11</div>
+      <div class="pub-title">
+        <span class="me">Michael Zhang</span>, <span class="authors">Hai Xiao, Hui Liu, Yineng Zhang.</span>
+        SGLang: Fast Serving Framework for Large Language and Vision-Language Models on AMD Instinct GPUs.
+        <span class="venue">ROCm Blogs, 2024.</span>
+      </div>
+      <div class="pub-links">
+        <a href="https://rocm.blogs.amd.com/artificial-intelligence/sglang/README.html" target="_blank">Blog</a>
+        <a href="projects/sglang.html" target="_blank">Project</a>
+      </div>
+    </div>
+
+    <div class="pub-card reveal">
+      <div class="pub-number">10</div>
+      <div class="pub-title">
+        <span class="me">Michael Zhang</span>.
+        CTranslate2: Efficient Inference with Transformer Models on AMD GPUs.
+        <span class="venue">ROCm Blogs, 2024.</span>
+      </div>
+      <div class="pub-links">
+        <a href="https://rocm.blogs.amd.com/artificial-intelligence/ctranslate2/README.html" target="_blank">Blog</a>
+      </div>
+    </div>
 
     <div class="pub-card reveal">
       <div class="pub-number">9</div>
@@ -1002,9 +1027,9 @@
   </div>
 
   <div class="patent-card reveal">
-    <div class="patent-title"><span style="color:var(--accent);font-weight:500">Sibo Zhang</span>, Liangjun Zhang. Vision-Based Equipment Activity Analysis and Safety Monitoring.</div>
-    <div class="patent-meta">US63/233,146 · 2021</div>
-    <div class="pub-links"><a href="https://patentimages.storage.googleapis.com/54/af/5c/f5a43637b8efc1/US20230072434A1.pdf" target="_blank">US Patent</a></div>
+    <div class="patent-title"><span style="color:var(--accent);font-weight:500">Sibo Zhang</span>, Liangjun Zhang. Vision-Based Safety Monitoring and/or Activity Analysis.</div>
+    <div class="patent-meta">US 12,327,345 · Granted Jun 2025</div>
+    <div class="pub-links"><a href="https://patents.google.com/patent/US12327345B2" target="_blank">US Patent</a></div>
   </div>
 
   <div class="patent-card reveal">
@@ -1086,7 +1111,7 @@
     <a href="https://scholar.google.com/citations?user=tbHn0joAAAAJ&hl=en" target="_blank">Scholar</a>
     <a href="https://github.com/michaelzhang-ai" target="_blank">GitHub</a>
   </div>
-  <p>&copy; 2025 Michael Zhang</p>
+  <p>&copy; 2026 Michael Zhang</p>
 </footer>
 
 <script>
