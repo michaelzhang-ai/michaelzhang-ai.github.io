@@ -408,16 +408,16 @@
 
       <section class="abstract">
         <h2 class="section-title">Overview</h2>
-        <p>Primary developer of an in-house CI toolkit and performance benchmarking infrastructure for <a href="https://github.com/sgl-project/sglang" target="_blank" rel="noopener">SGLang</a> on AMD Instinct MI300X/MI325X/MI355X GPUs. The system covers nightly accuracy validation (GSM8K, MMMU), throughput &amp; latency benchmarks, unit tests across ROCm 7.0/7.2, disaggregated 1P1D jobs, and model enablement for new LLM/VLM architectures — all orchestrated through Docker-based self-hosted GitHub Actions runners with a Flask-based monitoring dashboard.</p>
+        <p>Primary developer of an in-house CI toolkit and performance benchmarking infrastructure for <a href="https://github.com/sgl-project/sglang" target="_blank" rel="noopener">SGLang</a> on AMD Instinct MI300X/MI325X/MI355X GPUs. The system covers nightly accuracy validation (GSM8K, MMMU), throughput &amp; latency benchmarks, unit tests across ROCm 10 and 7.2, disaggregated 1P1D jobs, Miles RL nightlies, and model enablement for new LLM/VLM architectures — all orchestrated through Docker-based self-hosted GitHub Actions runners with a Flask-based monitoring dashboard.</p>
       </section>
 
       <div class="stat-grid">
         <div class="stat-card">
-          <div class="stat-number">103</div>
+          <div class="stat-number">177</div>
           <div class="stat-label">PRs Merged (2026)</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">10+</div>
+          <div class="stat-number">15+</div>
           <div class="stat-label">Models Enabled</div>
         </div>
         <div class="stat-card">
@@ -433,11 +433,11 @@
       <section class="abstract">
         <h2 class="section-title">Key Contributions</h2>
         <ul class="highlights">
-          <li><strong>CI Infrastructure.</strong> Built nightly accuracy (GSM8K, MMMU), performance benchmarks, and unit tests across ROCm 7.0/7.2 with Docker-based self-hosted GitHub Actions runners. Added MI355X disagg (1P1D) nightlies, JIT kernel benchmark stages, and HIP-graph profiling on ROCm 7.2.4 images.</li>
+          <li><strong>CI Infrastructure.</strong> Built nightly accuracy (GSM8K, MMMU), performance benchmarks, and unit tests across ROCm 10 and 7.2 with Docker-based self-hosted GitHub Actions runners. Added MI355X disagg (1P1D) nightlies, JIT kernel benchmark stages, and HIP-graph profiling. Brought up ROCm 10 release images and kernel wheels, Miles RL nightly images on MI30x/MI35x, and sharded PR CI to cut wall time.</li>
           <li><strong>CI Dashboard.</strong> Built Flask web dashboard with SQLite backend for CI health monitoring, performance trend visualization, AMD vs NVIDIA upstream test coverage tracking, and PR-level test results.</li>
-          <li><strong>Model Enablement.</strong> Enabled 10+ LLM/VLM architectures on AMD: MiniMax-M2.5 (MoE), Qwen 3.5 MXFP4, GLM-5 / 5.1 / 5.2 (NSA), Kimi-K2.5 / K3 (MLA+MoE), DeepSeek-V4, DeepSeek-OCR-2, GPT-OSS, Grok, Z-Image-Turbo. End-to-end: architecture research, backend selection (aiter/triton), test authoring, CI registration.</li>
-          <li><strong>Upstream Contributions.</strong> 197 PRs (103 merged) in 2026 to <a href="https://github.com/sgl-project/sglang/pulls?q=is%3Apr+author%3Amichaelzhang-ai+created%3A2026-01-01..2026-12-31" target="_blank" rel="noopener">sgl-project/sglang</a>. Active contributor to ROCm/sglang-ci. Fixed AMD-specific regressions in aiter, Triton (gfx950 fp8 KV-cache), FlashMLA, and diffusion backends.</li>
-          <li><strong>Performance.</strong> Benchmarked CLIP and Janus-Pro-7B on MI300X vs H100, achieving 1.30x and 1.20x geometric mean speedup. Throughput/latency regression testing for DeepSeek-V4, Kimi-K3, GLM-5.2, Qwen3.5, GPT-OSS, and Grok.</li>
+          <li><strong>Model Enablement.</strong> Enabled 15+ LLM/VLM architectures on AMD: MiniMax-M2.5 / M3 (MoE, MXFP8), Qwen 3.5 / 3.8 (MXFP4, FP8), GLM-5 / 5.1 / 5.2 / 5.3 (NSA), Kimi-K2.5 / K3 (MLA+MoE), DeepSeek-V4 / V4.1, DeepSeek-OCR-2, GPT-OSS, Grok, Z-Image-Turbo. End-to-end: architecture research, backend selection (aiter/triton), test authoring, CI registration.</li>
+          <li><strong>Upstream Contributions.</strong> 334 PRs (177 merged) in 2026 to <a href="https://github.com/sgl-project/sglang/pulls?q=is%3Apr+author%3Amichaelzhang-ai+created%3A2026-01-01..2026-12-31" target="_blank" rel="noopener">sgl-project/sglang</a>. Active contributor to ROCm/sglang-ci. Fixed AMD-specific regressions in aiter, Triton (gfx950 fp8 KV-cache), FP8 KV saturation, FlashMLA, KDA, Mooncake disagg, and diffusion backends.</li>
+          <li><strong>Performance.</strong> Benchmarked CLIP and Janus-Pro-7B on MI300X vs H100, achieving 1.30x and 1.20x geometric mean speedup. Throughput/latency regression testing for DeepSeek-V4.1, Kimi-K3, GLM-5.3, Qwen3.8, MiniMax-M3, GPT-OSS, and Grok.</li>
         </ul>
       </section>
 
