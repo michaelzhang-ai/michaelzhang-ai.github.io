@@ -421,10 +421,6 @@
           <div class="stat-label">Models Enabled</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">1.30x</div>
-          <div class="stat-label">MI300X vs H100</div>
-        </div>
-        <div class="stat-card">
           <div class="stat-number">3</div>
           <div class="stat-label">GPU Platforms</div>
         </div>
@@ -439,7 +435,7 @@
           <li><strong>Upstream Contributions.</strong> 334 PRs (177 merged) in 2026 to <a href="https://github.com/sgl-project/sglang/pulls?q=is%3Apr+author%3Amichaelzhang-ai+created%3A2026-01-01..2026-12-31" target="_blank" rel="noopener">sgl-project/sglang</a>. Active contributor to ROCm/sglang-ci. Fixed AMD-specific regressions in aiter, Triton (gfx950 fp8 KV-cache), FP8 KV saturation, FlashMLA, KDA, Mooncake disagg, and diffusion backends.</li>
           <li><strong>Miles RL.</strong> Brought AMD ROCm support to <a href="https://github.com/radixark/miles" target="_blank" rel="noopener">radixark/miles</a>, the RL post-training framework built on SGLang: ROCm 10 MI30x (gfx942) and MI35x Docker images, AMD CI on the ROCm 10 image, and fixes for LoRA, Megatron fused kernels, and hipify builds (<a href="https://github.com/radixark/miles/pulls?q=is%3Apr+author%3Amichaelzhang-ai" target="_blank" rel="noopener">9 PRs, 6 merged</a>).</li>
           <li><strong>AMD Bot &amp; Other Open Source.</strong> Built the AMD bot, <a href="https://github.com/bingxche/sglang-ci-bot" target="_blank" rel="noopener">sglang-ci-bot</a> (17 merged PRs): Claude-powered CI monitoring and PR review for SGLang. AMD MI300X/MI325X/MI355X GLM-5 docs in <a href="https://github.com/sgl-project/sgl-cookbook" target="_blank" rel="noopener">sgl-cookbook</a>.</li>
-          <li><strong>Performance.</strong> Benchmarked CLIP and Janus-Pro-7B on MI300X vs H100, achieving 1.30x and 1.20x geometric mean speedup. Throughput/latency regression testing for DeepSeek-V4.1, Kimi-K3, GLM-5.3, Qwen3.8, MiniMax-M3, GPT-OSS, and Grok.</li>
+          <li><strong>Performance.</strong> SemiAnalysis benchmark; throughput/latency tracking for Muse, DeepSeek, Kimi, GLM, Qwen, and MiniMax.</li>
         </ul>
       </section>
 
